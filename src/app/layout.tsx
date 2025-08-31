@@ -1,16 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Link from 'next/link';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,16 +12,40 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={inter.className}>
+        <nav className="bg-gray-800 p-4">
+
+          <ul className="flex space-x-4 max-w-4xl mx-auto">
+            <li>
+              <Link href="/" className="text-white hover:text-gray-300">
+                Main Page
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/cars" className="text-white hover:text-gray-300">
+                Car List
+              </Link>
+            </li>
+            
+            <li>
+              <Link href="/add" className="text-white hover:text-gray-300">
+                Add Car
+              </Link>
+            </li>
+          </ul>
+          
+        </nav>
+        <main className="container mx-auto p-4 max-w-4xl">
+          {children}
+        </main>
       </body>
     </html>
   );
 }
+
